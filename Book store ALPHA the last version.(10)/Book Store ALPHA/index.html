@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> ALPHA Book Store </title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+    
+    <section id="ALPHA">
+
+        <nav>
+
+            <div class="logo">
+                <img src="image/logo.png">
+            </div>
+
+            <ul>
+                <li><a href="#Home">Home</a></li>
+                <li><a href="#About">About</a></li>
+                <li><a href="#Featured">Featured</a></li>
+                <li><a href="#Arrivals">Coming Soon</a></li>
+                <li><a href="#Reviews">Reviews</a></li>
+                <li id="adminPageLink" style="display: none;"><a href="admin.html">Admin Page</a></li>
+            </ul>
+  
+            <div class="social_icon">
+                <i id="searchToggleBtn" class="fa-solid fa-magnifying-glass" title="Search Books"></i>
+                <i id="likedBooksToggleBtn" class="fa-solid fa-heart" title="My Liked Books"></i>
+                <span class="cart-icon-wrapper" id="cartToggleBtn" title="My Cart">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                  <span id="cartBadge"></span>
+                </span>
+                <button id="openLogin" class="login_nav_btn">Login</button>
+                 <button id="logoutBtn" class="login_nav_btn" style="display: none;">Logout</button>
+            </div>
+
+        </nav>
+
+        <div id="welcomeMessage" class="welcome-message"></div>
+
+    <!-- Search Panel -->
+    <div id="searchPanel" class="search-panel">
+        <div class="search-panel-inner">
+            <input type="text" id="searchInput" placeholder="Search for a book by title..." />
+            <button id="searchSubmitBtn"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+            <button id="searchCloseBtn" class="search-close-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="searchResults" class="search-results"></div>
+    </div>
+
+    <!-- Liked Books Panel -->
+    <div id="likedBooksPanel" class="search-panel">
+        <div class="search-panel-inner">
+            <h2 style="flex: 1; color: #089da1; margin: 0;">❤ My Liked Books</h2>
+            <button id="likedBooksCloseBtn" class="search-close-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="likedBooksResults" class="search-results"></div>
+    </div>
+
+    <!-- Cart Panel -->
+    <div id="cartPanel" class="search-panel">
+        <div class="search-panel-inner">
+            <h2 style="flex:1; color:#089da1; margin:0;">🛒 My Cart</h2>
+            <button id="cartCloseBtn" class="search-close-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="cartResults" class="search-results"></div>
+    </div>
+
+    <div class="login-overlay" id="loginOverlay">
+      <div class="wrapper">
+        <!-- Tab buttons -->
+        <div style="display:flex; margin-bottom:20px; border-bottom:2px solid #089da1;">
+          <button id="tabLoginBtn" onclick="switchTab('login')" style="flex:1;padding:10px;border:none;background:none;font-size:16px;font-weight:bold;color:#089da1;border-bottom:3px solid #089da1;cursor:pointer;">Login</button>
+          <button id="tabSignupBtn" onclick="switchTab('signup')" style="flex:1;padding:10px;border:none;background:none;font-size:16px;font-weight:bold;color:#888;cursor:pointer;">Sign Up</button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm" style="display:block;">
+          <h1>Login</h1>
+          <div class="input-box">
+            <input type="email" id="loginEmail" placeholder="Email" required>
+            <i class='bx bxs-user'></i>
+          </div>
+          <div class="input-box">
+            <input type="password" id="password" placeholder="Password" required>
+            <i class='bx bxs-lock-alt'></i>
+          </div>
+          <div class="remember-forgot">
+            <label><input type="checkbox"> Remember Me</label>
+            <a href="#" id="closeLoginText">Close</a>
+          </div>
+          <button type="submit" class="btn">Login</button>
+          <p id="loginError" class="login-error"></p>
+        </form>
+
+        <!-- Sign Up Form -->
+        <form id="signupForm" style="display:none;">
+          <h1>Sign Up</h1>
+          <div class="input-box">
+            <input type="text" id="signupName" placeholder="Your name" required>
+            <i class='bx bxs-user'></i>
+          </div>
+          <div class="input-box">
+            <input type="email" id="signupEmail" placeholder="Email" required>
+            <i class='bx bxs-envelope'></i>
+          </div>
+          <div class="input-box">
+            <input type="password" id="signupPassword" placeholder="Choose a password" required>
+            <i class='bx bxs-lock-alt'></i>
+          </div>
+          <div class="input-box">
+            <input type="password" id="signupConfirm" placeholder="Confirm password" required>
+            <i class='bx bxs-lock-alt'></i>
+          </div>
+          <div class="remember-forgot">
+            <label></label>
+            <a href="#" onclick="switchTab('login'); return false;">Already have an account?</a>
+          </div>
+          <button type="submit" class="btn">Create Account</button>
+          <p id="signupError" class="login-error"></p>
+          <p id="signupSuccess" style="color:#089da1;font-size:14px;text-align:center;"></p>
+        </form>
+      </div>
+    </div>
+
+    <!-- Order Modal -->
+    <div id="orderModal" class="login-overlay" style="display:none; z-index:10000; align-items:flex-start; padding-top:20px;">
+      <div class="wrapper" style="max-width:560px; width:95%; max-height:92vh; overflow-y:auto; border-radius:16px; padding:28px;">
+
+        <!-- Header -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+          <h1 style="font-size:22px; color:#3e356b; margin:0;">📦 Place Your Order</h1>
+          <button onclick="document.getElementById('orderModal').style.display='none';"
+            style="background:none;border:none;font-size:24px;cursor:pointer;color:#999;line-height:1;">✕</button>
+        </div>
+
+        <!-- Book preview -->
+        <div id="orderBookInfo" style="display:flex;align-items:center;gap:14px;margin-bottom:20px;padding:12px;background:#f0fdfd;border:1.5px solid #089da1;border-radius:10px;">
+          <input type="hidden" id="orderBookId" value="" />
+          <img id="orderBookImg" src="" alt="Book" style="width:60px;height:85px;object-fit:cover;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.15);">
+          <div>
+            <div id="orderBookTitle" style="font-weight:bold;font-size:16px;color:#3e356b;"></div>
+            <div id="orderBookAuthor" style="font-size:13px;color:#666;margin-top:3px;"></div>
+          </div>
+        </div>
+
+        <!-- Form fields -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+          <div>
+            <label style="font-size:12px;color:#666;font-weight:600;">Full Name *</label>
+            <input id="orderFullName" type="text" placeholder="Your Name"
+              style="width:100%;padding:10px 14px;border:1.5px solid #ccc;border-radius:8px;font-size:14px;outline:none;box-sizing:border-box;margin-top:4px;">
+          </div>
+          <div>
+            <label style="font-size:12px;color:#666;font-weight:600;">Phone Number *</label>
+            <input id="orderPhone" type="tel" placeholder="+389 00 000 000"
+              style="width:100%;padding:10px 14px;border:1.5px solid #ccc;border-radius:8px;font-size:14px;outline:none;box-sizing:border-box;margin-top:4px;">
+          </div>
+          <div>
+            <label style="font-size:12px;color:#666;font-weight:600;">Email <span style="color:#aaa;">(optional)</span></label>
+            <input id="orderEmail" type="email" placeholder="you@example.com"
+              style="width:100%;padding:10px 14px;border:1.5px solid #ccc;border-radius:8px;font-size:14px;outline:none;box-sizing:border-box;margin-top:4px;">
+          </div>
+          <div>
+            <label style="font-size:12px;color:#666;font-weight:600;">Quantity *</label>
+            <input id="orderQty" type="number" placeholder="1" min="1" max="99" value="1"
+              style="width:100%;padding:10px 14px;border:1.5px solid #ccc;border-radius:8px;font-size:14px;outline:none;box-sizing:border-box;margin-top:4px;">
+          </div>
+          <div>
+            <label style="font-size:12px;color:#666;font-weight:600;">Country *</label>
+            <input id="orderCountry" type="text" placeholder="North Macedonia"
+              style="width:100%;padding:10px 14px;border:1.5px solid #ccc;border-radius:8px;font-size:14px;outline:none;box-sizing:border-box;margin-top:4px;">
+          </div>
+          <div>
+            <label style="font-size:12px;color:#666;font-weight:600;">City *</label>
+            <input id="orderCity" type="text" placeholder="Skopje"
+              style="width:100%;padding:10px 14px;border:1.5px solid #ccc;border-radius:8px;font-size:14px;outline:none;box-sizing:border-box;margin-top:4px;">
+          </div>
+        </div>
+
+        <div style="margin-bottom:12px;">
+          <label style="font-size:12px;color:#666;font-weight:600;">Full Address *</label>
+          <input id="orderAddress" type="text" placeholder="Street name, building number, floor..."
+            style="width:100%;padding:10px 14px;border:1.5px solid #ccc;border-radius:8px;font-size:14px;outline:none;box-sizing:border-box;margin-top:4px;">
+        </div>
+
+        <div style="margin-bottom:16px;">
+          <label style="font-size:12px;color:#666;font-weight:600;">Delivery Notes <span style="color:#aaa;">(optional)</span></label>
+          <textarea id="orderNotes" placeholder="e.g. Leave at the door, call before delivery..."
+            style="width:100%;padding:10px 14px;border:1.5px solid #ccc;border-radius:8px;font-size:14px;outline:none;box-sizing:border-box;margin-top:4px;resize:vertical;min-height:60px;font-family:inherit;"></textarea>
+        </div>
+
+        <!-- Map section -->
+        <div style="margin-bottom:6px;">
+          <label style="font-size:12px;color:#666;font-weight:600;">📍 Pin Your Location on Map</label>
+          <p style="font-size:12px;color:#aaa;margin:4px 0 8px;">Search your address or click on the map to drop a pin.</p>
+
+          <!-- Map search bar -->
+          <div style="display:flex;gap:8px;margin-bottom:10px;">
+            <input id="orderMapSearch" type="text" placeholder="Search address on map..."
+              style="flex:1;padding:9px 14px;border:1.5px solid #089da1;border-radius:8px;font-size:14px;outline:none;">
+            <button id="orderMapSearchBtn"
+              style="padding:9px 16px;background:#089da1;color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;font-weight:bold;white-space:nowrap;">
+              🔍 Search
+            </button>
+          </div>
+
+          <div id="orderMap" style="width:100%;height:240px;border-radius:10px;border:1.5px solid #089da1;margin-bottom:8px;"></div>
+          <p id="orderMapLabel" style="font-size:12px;color:#089da1;margin-bottom:14px;min-height:18px;">No pin placed yet — click on the map to pin your location.</p>
+        </div>
+
+        <p id="orderError" style="color:#e74c3c;font-size:13px;margin-bottom:10px;min-height:18px;"></p>
+
+        <div style="display:flex;gap:10px;">
+          <button id="orderSubmitBtn"
+            style="flex:1;padding:13px;background:linear-gradient(135deg,#089da1,#3e356b);color:#fff;border:none;border-radius:25px;font-size:15px;font-weight:bold;cursor:pointer;transition:opacity 0.2s;">
+            ✔ Confirm Order
+          </button>
+          <button onclick="document.getElementById('orderModal').style.display='none';"
+            style="flex:0 0 auto;padding:13px 20px;background:#eee;color:#555;border:none;border-radius:25px;font-size:15px;font-weight:bold;cursor:pointer;">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+        <div class="main">
+
+            <div class="main_tag">
+                <h1>WELCOME TO <B> ALPHA </B><br><span>BOOK STORE</span></h1>
+
+                <p>
+                    Reading books is a transformative experience that enriches our lives
+                     in
+                     countless ways. 
+                    It sharpens the mind, enhances 
+                    vocabulary, and improves focus and concentration. Books are a 
+                    gateway to different worlds, offering new perspectives and insights.
+                     They foster empathy by allowing us to live countless lives through characters.
+                      Reading also serves as a stress reliever, providing a much-needed escape from the hustle of daily life. It’s a powerful tool for lifelong learning, keeping our brains active and engaged. Ultimately, reading is a journey that nurtures the soul and expands the horizons of our knowledge.
+                      <span class="more-text">Furthermore, a robust reading habit can lead to better sleep, improved analytical thinking skills, and enhanced memory. It allows you to continuously learn and expand your understanding of diverse cultures and histories. Whether you read fiction or non-fiction, the knowledge you gain is invaluable and sticks with you for a lifetime.</span>
+                </p>
+                <a href="#Featured" class="main_btn">Shop Now</a>
+
+            </div>
+
+            <div class="main_img">
+                <img src="image/table.png">
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+
+    <!--Services-->
+
+    <div  class="services">
+
+        <div class="services_box">
+
+            <div class="services_card">
+                <i class="fa-solid fa-truck-fast"></i>
+                <h3>Fast Delivery</h3>
+                <p>
+                Available only in the
+                </p>
+                  <h4>the balkan </h4>
+                   contries
+                </p>
+            </div>
+
+            <div class="services_card">
+                <i class="fa-solid fa-headset"></i>
+                <h3>24 x 7 Services</h3>
+                <p>
+                <br>
+                <br>
+                <br>
+                </p>
+            </div>
+
+            <div class="services_card">
+                <i class="fa-solid fa-tag"></i>
+                <h3>Best Deal</h3>
+                <p>
+                DISCOUNT ON ALL BOOKS 
+                 <br>
+                 <br>
+                <h2> 50%</h2> 
+                </p>
+            </div>
+
+            <div class="services_card">
+                 <i class="fa-solid fa-lock"></i>
+                <h3>Secure Payment</h3>
+            
+                <br>
+                <ul>
+                <li>
+                <a> Add your <h4><b>card </b></h4></a>
+                </li>
+                 </ul>
+                <br>
+                <p>
+                
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+    <!--About-->
+
+    <div  id="About" class="about">
+
+        <div class="about_image">
+            <img src="image/about.jpg">
+        </div>
+        <div class="about_tag">
+            <h1>About Us</h1>
+            <p>
+                <mark> libraries are vital community hubs that offer free access to 
+                
+                
+                knowledge and information. They serve as gateways to lifelong learn
+                ing, providing a diverse range of books, digital resources, and
+                 programs for all ages. As inclusive spaces, libraries foster 
+                 education, cultural enrichment, and social interaction. They 
+                 support literacy and research, while also offering quiet areas
+                  for study and reflection. Public libraries play a key role in 
+                  empowering individuals and communities, ensuring that everyone, 
+                  regardless of background, has the opportunity to learn, grow,
+                 and connect with the world of ideas12.
+                 </mark>
+                 <span class="more-text"><br> <mark> At ALPHA Book Store, we strive to emulate this community hub atmosphere by offering a vast collection of books tailored to all readers. We host local reading events, book signings, and community workshops to ensure our space is more than just a retail store, but a welcoming environment for all literature lovers.</mark> </span>
+            </p>
+            <a href="#Featured" class="about_btn">Shop Now</a>
+        </div>
+
+    </div>
+  <!--Books-->
+
+  <div id="Featured" class="featured_boks">
+
+    <h1>Featured Books</h1>
+
+    <div class="featured_book_box" id="featuredBookBox">
+        <!-- Books are rendered dynamically by script.js -->
+    </div>
+
+</div>
+
+<!-- Book Detail Modal -->
+<div class="book-modal-overlay" id="bookModalOverlay">
+    <div class="book-modal">
+        <button class="book-modal-close" id="bookModalClose">&times;</button>
+        <div class="book-modal-content">
+            <div class="book-modal-img">
+                <img id="modalBookImg" src="" alt="Book Cover">
+            </div>
+            <div class="book-modal-info">
+                <h2 id="modalBookTitle"></h2>
+                <p class="modal-author"><i class="fa-solid fa-pen-nib"></i> <span id="modalBookAuthor"></span></p>
+                <p class="modal-genre"><i class="fa-solid fa-bookmark"></i> <span id="modalBookGenre"></span></p>
+                <div class="modal-categories-row" id="modalCategoriesRow"></div>
+                <div class="modal-rating-stars" id="modalRatingStars"></div>
+                <p class="modal-price"><i class="fa-solid fa-tag"></i> <span id="modalBookPrice"></span></p>
+                <div class="modal-divider"></div>
+                <p class="modal-description" id="modalBookDesc"></p>
+                <div class="modal-actions-row" style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 8px;">
+                    <button class="modal-select-btn" id="modalSelectBtn">&#x1F6D2; Add to Cart</button>
+                    <button
+                        type="button"
+                        class="s-like-btn"
+                        id="modalLikeBtn"
+                        style="display: none; padding: 12px 22px; border: none; border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; background: #e74c3c; color: #fff;"
+                    >
+                        &#x2764; Like
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--Arrivals-->
+
+<div id ="Arrivals" class="arrivals">
+    <h1>Coming Soon</h1>
+
+    <div class="arrivals_box">
+
+        <div class="arrivals_card">
+            <div class="arrivals_image">
+                <img src="image/arrival_1.jpg" alt="The Giver">
+            </div>
+            <div class="arrivals_tag">
+                <p>The Giver</p>
+                <div class="arrivals_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <a href="arrivales_1.html" class="arrivals_btn">Learn More</a>
+            </div>
+        </div>
+
+        <div class="arrivals_card">
+            <div class="arrivals_image">
+                <img src="image/arrival_2.jpg" alt="The Wright Brothers">
+            </div>
+            <div class="arrivals_tag">
+                <p>The Wright Brothers</p>
+                <div class="arrivals_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <a href="arrivales_2.html" class="arrivals_btn">Learn More</a>
+            </div>
+        </div>
+
+        <div class="arrivals_card">
+            <div class="arrivals_image">
+                <img src="image/arrival_3.jpg" alt="Radical Gardening">
+            </div>
+            <div class="arrivals_tag">
+                <p>Radical Gardening</p>
+                <div class="arrivals_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <a href="arrivales_3.html" class="arrivals_btn">Learn More</a>
+            </div>
+        </div>
+
+        <div class="arrivals_card">
+            <div class="arrivals_image">
+                <img src="image/arrival_4.jpg" alt="Red Queen">
+            </div>
+            <div class="arrivals_tag">
+                <p>Red Queen</p>
+                <div class="arrivals_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <a href="arrivales_4.html" class="arrivals_btn">Learn More</a>
+            </div>
+        </div>
+
+        <div class="arrivals_card">
+            <div class="arrivals_image">
+                <img src="image/arrival_5.jpg" alt="To Kill a Mockingbird">
+            </div>
+            <div class="arrivals_tag">
+                <p>To Kill a Mockingbird</p>
+                <div class="arrivals_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <a href="arrivales_5.html" class="arrivals_btn">Learn More</a>
+            </div>
+        </div>
+
+        <div class="arrivals_card">
+            <div class="arrivals_image">
+                <img src="image/arrival_6.jpg" alt="Harry Potter and the Philosopher's Stone">
+            </div>
+            <div class="arrivals_tag">
+                <p>Harry Potter: Philosopher's Stone</p>
+                <div class="arrivals_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <a href="arrivales_6.html" class="arrivals_btn">Learn More</a>
+            </div>
+        </div>
+
+        <div class="arrivals_card">
+            <div class="arrivals_image">
+                <img src="image/arrival_7.jpg" alt="Heroes of Olympus: The Lost Hero">
+            </div>
+            <div class="arrivals_tag">
+                <p>Heroes of Olympus: The Lost Hero</p>
+                <div class="arrivals_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <a href="arrivales_7.html" class="arrivals_btn">Learn More</a>
+            </div>
+        </div>
+
+        <div class="arrivals_card">
+            <div class="arrivals_image">
+                <img src="image/arrival_8.webp" alt="Diary of a Wimpy Kid: Squid Game">
+            </div>
+            <div class="arrivals_tag">
+                <p>Wimpy Kid: Squid Game</p>
+                <div class="arrivals_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <a href="arrivales_8.html" class="arrivals_btn">Learn More</a>
+            </div>
+        </div>
+
+        <div class="arrivals_card">
+            <div class="arrivals_image">
+                <img src="image/arrival_9.jpg" alt="Ranger's Apprentice: The Ruins of Gorlan">
+            </div>
+            <div class="arrivals_tag">
+                <p>Ranger's Apprentice: Ruins of Gorlan</p>
+                <div class="arrivals_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <a href="arrivales_9.html" class="arrivals_btn">Learn More</a>
+            </div>
+        </div>
+
+        <div class="arrivals_card">
+            <div class="arrivals_image">
+                <img src="image/arrival_10.jpg" alt="Percy Jackson and the Lightning Thief">
+            </div>
+            <div class="arrivals_tag">
+                <p>Percy Jackson: Lightning Thief</p>
+                <div class="arrivals_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <a href="arrivales_10.html" class="arrivals_btn">Learn More</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<br><br>
+
+
+
+
+
+<!--reviews-->
+
+<div class="reviews">
+    <h1>Reviews</h1>
+
+    <div class="review_box">
+
+        <div class="review_card">
+            <i class="fa-solid fa-quote-right"></i>
+            <div class="card_top">
+                <img src="image/review_1.jpg">
+            </div>
+            <div class="card">
+                <h2>Demiroski</h2>
+                <p>Sampson’s debut novel adorably illustrates how a library can be much more than 
+                    a place where people borrow books. Readers will have all the feels as they root
+                     for June, learn what the library means to the village’s residents,
+                     and see how crucial libraries are to communities
+                </p>
+                <div class="review_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                 <i class="fa-solid fa-star"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="review_card">
+            <i class="fa-solid fa-quote-right"></i>
+            <div class="card_top">
+                <img src="image/review_2.jpg">
+            </div>
+            <div class="card">
+                <h2>Zeinab</h2>
+                <p>A good library is more than just a collection of books. It should be a hub of
+                     learning, community, and innovation. Some key elements
+                      that every good 
+                     library should have include knowledgeable and friendly librarians who 
+                     play a crucial
+                     role in assisting patrons.
+                </p>
+                <div class="review_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="review_card">
+            <i class="fa-solid fa-quote-right"></i>
+            <div class="card_top">
+                <img src="image/review_3.jpg">
+            </div>
+            <div class="card">
+                <h2>Shehab</h2>
+                <p>“Their customer service is second to none.”
+                    “The product quality is consistently outstanding, exceeding my expectations every time.”
+                    “I was completely impressed with their professionalism and customer service.”
+                  
+                </p>
+                <div class="review_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                   
+                </div>
+            </div>
+        </div>
+
+        <div class="review_card">
+            <i class="fa-solid fa-quote-right"></i>
+            <div class="card_top">
+                <img src="image/review_4.jpg">
+            </div>
+            <div class="card">
+                <h2>Sofeya</h2>
+                <p>
+                    While not a direct review, sentiment analysis can be applied to library-related content.
+                     For example, you can build a sentiment analysis classifier to predict
+                      whether online discussions
+                      about a library are positive or negative. This can help
+                       libraries understand public
+                     sentiment and improve their services.
+                </p>
+                <div class="review_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="reviews" id="Reviews">
+
+    <div class="review_action">
+        <button id="openReviewBtn" class="review_btn">Add Review</button>
+    </div>
+
+    <div class="review_box" id="reviewBox">
+
+</div>
+
+
+<!--Banner-->
+
+<div class="banner">
+    <ul>
+      <li>
+        <a href="#ALPHA">
+          <img src="image/logo.png" alt="logo">
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+    <!--Footer-->
+
+    <footer>
+        <div class="footer_main">
+
+            <div class="tag">
+                <img src="image/logo.png">
+                <p>
+                    "Dear valued customer,
+
+Thank you for choosing our website to explore and 
+purchase the book! Your support means the world to us. We hope you enjoy reading
+ it and find it both enlightening and entertaining. If you have any feedback or need assistance, 
+ feel free to reach out. Happy reading!" 
+Feel free to customize this message to match your brand’s tone and style! 
+                </p>
+
+            </div>
+
+            <div class="tag">
+                <h1>Quick Link</h1>
+                <a href="#Home">Home</a>
+                <a href="#About">About</a>
+                <a href="#Featured">Featured</a>
+                <a href="#Arrivals">Coming Soon</a>
+                <a href="#Reviews">Reviews</a>
+            </div>
+
+            <div class="tag">
+                <h1>Contact Info</h1>
+                <a href="#"><i class="fa-solid fa-phone"></i>+397*****</a>
+                <a href="#"><i class="fa-solid fa-phone"></i>+397******</a>
+                <a href="mailto:engin.lisicani@gmail.com"><i class="fa-solid fa-envelope"></i>engin.lisicani@gmail.com</a>
+                
+            </div>
+
+            <div class="tag">
+                <h1>Follow Us</h1>
+                <div class="social_link">
+                    <i class="fa-brands fa-facebook-f"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-twitter"></i>
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </div>
+                
+            </div>
+      
+            
+        </div>
+
+        <p class="end">Design By<span><i class="fa-solid fa-face-grin"></i> Adam Demiroski</span></p>
+
+    <!-- Video Overlay -->
+    <div id="homeVideoOverlay" class="video-overlay">
+        <div class="video-modal-container">
+            <button id="closeVideoBtn" class="video-close-btn" title="Close Video">&times;</button>
+            <video id="homeVideo" controls playsinline preload="auto">
+                <source src="Wolf_finds_book_202604231758.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

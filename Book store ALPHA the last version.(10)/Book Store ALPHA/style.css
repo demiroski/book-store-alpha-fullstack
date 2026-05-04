@@ -1,0 +1,2278 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  scroll-behavior: smooth;
+}
+
+section {
+  width: 100%;
+  height: 200vh;
+  background-image: url(image/wolfe.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+/* =========================================
+   Navbar
+========================================= */
+section nav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: 0 0 20px #1900ff;
+  background: linear-gradient();
+}
+
+section nav .logo img {
+  width: 135px;
+  height: auto margin 100%;
+}
+
+section nav ul {
+  list-style: none;
+}
+
+section nav li {
+  display: inline-block;
+  padding: 0 10px;
+}
+
+section nav li a {
+  text-decoration: none;
+  color: #1900ff;
+}
+
+section nav li a:hover {
+  color: #ff0000;
+}
+
+section nav .social_icon i {
+  margin: 0 5px;
+  font-size: 18px;
+}
+
+section nav .social_icon i:hover {
+  color: #0d93dc;
+  cursor: pointer;
+}
+/* LOGIN BUTTON IN NAV */
+.login_nav_btn {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 20px;
+  background: #089da1;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.login_nav_btn:hover {
+  background: #1900ff;
+}
+
+/* LOGIN POPUP */
+/* =========================================
+   Modals
+========================================= */
+.login-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.login-overlay.show {
+  display: flex;
+}
+
+.login-overlay .wrapper {
+  width: 420px;
+  max-width: 90%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(9px);
+  color: #fff;
+  border-radius: 12px;
+  padding: 30px 40px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
+}
+
+.login-overlay .wrapper h1 {
+  font-size: 36px;
+  text-align: center;
+}
+
+.login-overlay .wrapper .input-box {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin: 30px 0;
+}
+
+.login-overlay .input-box input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  font-size: 16px;
+  color: #fff;
+  padding: 20px 45px 20px 20px;
+}
+
+.login-overlay .input-box input::placeholder {
+  color: #fff;
+}
+
+.login-overlay .input-box i {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+}
+
+.login-overlay .remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14.5px;
+  margin: -15px 0 15px;
+}
+
+.login-overlay .remember-forgot label input {
+  accent-color: #fff;
+  margin-right: 3px;
+}
+
+.login-overlay .remember-forgot a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.login-overlay .remember-forgot a:hover {
+  text-decoration: underline;
+}
+
+.login-overlay .btn {
+  width: 100%;
+  height: 45px;
+  background: #fff;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.login-overlay .btn:hover {
+  background: #089da1;
+  color: #fff;
+}
+
+.login-error {
+  text-align: center;
+  margin-top: 15px;
+  color: #ffb3b3;
+  font-size: 14px;
+  min-height: 20px;
+}
+
+/* WELCOME MESSAGE */
+.welcome-message {
+  position: fixed;
+  top: 90px;
+  right: 20px;
+  background: #089da1;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  z-index: 9999;
+  display: none;
+  font-weight: bold;
+}
+
+.welcome-message.active {
+  display: block;
+}
+
+/* =========================================
+   Home
+========================================= */
+section .main {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  top: 10%;
+}
+
+section .main h1 {
+  position: relative;
+  font-size: 55px;
+  top: 80px;
+  left: 25px;
+}
+section .main h1 b {
+  color: rgb(25, 0, 255);
+  position: relative;
+  z-index: 1;
+}
+
+section .main h1 b {
+  text-shadow: 7px 3px 10px rgb(0, 0, 0);
+}
+
+section .main h1 span {
+  color: #3e356b;
+}
+
+section .main p {
+  width: 650px;
+  text-align: justify;
+  line-height: 22px;
+  position: relative;
+  top: 125px;
+  left: 25px;
+}
+
+section .main .main_tag .main_btn {
+  background: #3e356b;
+  padding: 10px 20px;
+  position: relative;
+  top: 200px;
+  left: 25px;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+section .main .main_tag .main_btn:hover {
+  background-color: transparent;
+  border-color: #1100ff;
+  color: #1100ff;
+  box-shadow: 4px 4px 40px;
+}
+
+section .main .main_img img {
+  width: 780px;
+  position: relative;
+  top: 90px;
+  left: 20px;
+}
+
+/*services*/
+
+.services {
+  width: 100%;
+  height: auto;
+  margin: 35px 0;
+}
+
+.services .services_box {
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.services .services_box .services_card {
+  text-align: center;
+  width: 310px;
+  height: auto;
+  box-shadow: 0 0 8px #1900ff;
+  padding: 15px 10px;
+}
+
+.services .services_box .services_card i {
+  color: #089da1;
+  font-size: 45px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.services .services_box .services_card h3 {
+  margin-bottom: 10px;
+}
+
+.services .services_box h4 {
+  /* CSS code for multiple layered text shadows */
+  text-shadow:
+    1px 1px 2px rgb(0, 195, 255),
+    0 0 25px rgb(3, 175, 188),
+    0 0 5px rgb(255, 255, 255);
+}
+
+.services .services_box h2 {
+  /* CSS code for multiple layered text shadows */
+  text-shadow:
+    1px 1px 2px rgb(0, 195, 255),
+    0 0 25px rgb(3, 175, 188),
+    0 0 5px rgb(255, 255, 255);
+}
+.services div ul {
+  list-style-type: none;
+}
+
+.services .services_box .services_card li a:hover {
+  color: #d11e1e;
+  box-shadow: 4px 4px 40px;
+}
+
+.services .services_box .services_card li a {
+  text-decoration: none;
+  color: #000;
+}
+
+/*about*/
+
+.about {
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.about .about_image img {
+  width: 780px;
+}
+
+.about .about_tag h1 {
+  font-size: 50px;
+  position: relative;
+  bottom: 35px;
+}
+
+.about .about_tag p {
+  line-height: 22px;
+  width: 650px;
+  text-align: justify;
+  margin-bottom: 15px;
+}
+
+.about .about_tag p mark {
+  background-color: rgb(0, 255, 255);
+}
+
+.about .about_tag .about_btn {
+  padding: 10px 20px;
+  background: #089da1;
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+  top: 50px;
+}
+.about .about_tag .about_btn:hover {
+  background-color: transparent;
+  border-color: #1100ff;
+  color: #07e4e4;
+  box-shadow: 4px 4px 10px;
+}
+
+/*Books*/
+/* =========================================
+   Featured Books
+========================================= */
+.featured_boks {
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+  padding: 70px 0;
+}
+
+.featured_boks h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  font-size: 45px;
+}
+
+.featured_boks .featured_book_box {
+  width: 95%;
+  height: 60vh;
+  margin: 0 auto;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  overflow: hidden;
+  overflow-x: auto;
+}
+
+.featured_boks .featured_book_box .featured_book_card {
+  width: 250px;
+  height: 420px;
+  text-align: center;
+  padding: 15px;
+  border: 1px solid #919191;
+  margin: auto 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.featured_boks .featured_book_box .featured_book_card:hover {
+  box-shadow: 0 0 5px #089da1;
+}
+
+.featured_boks .featured_book_box .featured_book_card .featurde_book_img img {
+  width: 150px;
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.featured_boks .featured_book_box .featured_book_card .featurde_book_img {
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.featured_boks
+  .featured_book_box
+  .featured_book_card:hover
+  .featurde_book_img
+  img {
+  transform: scale(1.1);
+}
+.featured_boks .featured_book_box .featured_book_card .featurde_book_img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.discount-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #e74c3c;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  animation: pulseBadge 2s infinite;
+}
+
+@keyframes pulseBadge {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.book_price .new-price {
+  font-size: 20px;
+  font-weight: bold;
+  color: #3e356b;
+  margin-right: 8px;
+}
+
+.book_price .old-price {
+  font-size: 14px;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.featured_boks .featured_book_box .featured_book_card .featurde_book_tag h2 {
+  margin: 12px;
+}
+
+.featured_boks
+  .featured_book_box
+  .featured_book_card
+  .featurde_book_tag
+  .writer {
+  color: #919191;
+}
+
+.featured_boks
+  .featured_book_box
+  .featured_book_card
+  .featurde_book_tag
+  .book_price {
+  margin-top: 8px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.featured_boks
+  .featured_book_box
+  .featured_book_card
+  .featurde_book_tag
+  .book_price
+  sub {
+  font-weight: 100;
+  padding: 0 5px;
+}
+
+.featured_boks
+  .featured_book_box
+  .featured_book_card
+  .featurde_book_tag
+  .f_btn {
+  padding: 8px 20px;
+  border: 2px solid #089da1;
+  text-decoration: none;
+  color: #000;
+}
+
+.featured_boks
+  .featured_book_box
+  .featured_book_card
+  .featurde_book_tag
+  .f_btn:hover {
+  background-color: transparent;
+  border-color: #1100ff;
+  color: #07e4e4;
+  box-shadow: 4px 4px 10px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1100ff;
+  border-radius: 10px;
+}
+
+/*arrivals*/
+/* =========================================
+   Coming Soon
+========================================= */
+.arrivals {
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+  margin-bottom: 35px;
+}
+
+.arrivals h1 {
+  font-size: 50px;
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.arrivals .arrivals_box {
+  width: 95%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 25px 0;
+}
+
+.arrivals .arrivals_box .arrivals_card {
+  width: 220px;
+  height: auto;
+  min-height: 360px;
+  text-align: center;
+  padding: 12px 8px;
+  border: 1px solid #919191;
+  margin: auto 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.arrivals .arrivals_box .arrivals_card:hover {
+  box-shadow: 0 0 5px #089da1;
+}
+
+.arrivals .arrivals_box .arrivals_card .arrivals_image {
+  width: 150px;
+  height: 220px;
+  margin: 0 auto;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.arrivals .arrivals_box .arrivals_card .arrivals_image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: 0.3s;
+}
+
+.arrivals .arrivals_box .arrivals_card:hover .arrivals_image img {
+  transform: scale(1.1);
+}
+
+.arrivals .arrivals_box .arrivals_card .arrivals_tag p {
+  font-family: queen of camelot;
+  font-size: 15px;
+  margin: 8px 4px;
+  line-height: 1.3;
+  word-wrap: break-word;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrivals .arrivals_box .arrivals_card .arrivals_tag .arrivals_icon {
+  color: #089da1;
+  margin-bottom: 18px;
+}
+
+.arrivals .arrivals_box .arrivals_card .arrivals_tag .arrivals_btn {
+  padding: 8px 20px;
+  border: 2px solid #089da1;
+  text-decoration: none;
+  color: #000;
+}
+
+.arrivals .arrivals_box .arrivals_card .arrivals_tag .arrivals_btn:hover {
+  background-color: transparent;
+  border-color: #1100ff;
+  color: #07e4e4;
+  box-shadow: 4px 4px 10px;
+}
+
+/*reviews*/
+
+.reviews {
+  width: 100%;
+  height: auto;
+  margin-bottom: 8px;
+}
+
+.reviews h1 {
+  text-align: center;
+  font-size: 50px;
+  margin-top: 55px;
+  letter-spacing: 5px;
+}
+
+.reviews .review_box {
+  width: 95%;
+  height: auto;
+  margin: 55px auto 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 10px 5px 15px 5px;
+}
+.reviews .review_box .review_card {
+  width: 280px;
+  min-width: 280px;
+  height: 260px;
+  box-shadow: 0 0 8px #089da1;
+  padding: 12px;
+  margin: 0 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border-radius: 10px;
+}
+
+.reviews .review_box .review_card i {
+  float: right;
+  font-size: 70px;
+  position: relative;
+  bottom: 10px;
+  color: #eaeaea;
+}
+
+.reviews .review_box .review_card .card_top img {
+  width: 50px;
+  border-radius: 50%;
+  margin-bottom: 6px;
+}
+
+.reviews .review_box .review_card .card p {
+  margin: 6px 0;
+  text-align: justify;
+  line-height: 18px;
+  font-size: 13px;
+}
+
+.reviews .review_box .review_card .card .review_icon i {
+  font-size: 12px;
+  float: left;
+  margin-top: 10px;
+  color: #089da1;
+  padding: 0 1px;
+}
+
+/*heta men aandy*/
+.review_action {
+  text-align: center;
+  margin: 55px 0;
+}
+
+.review_btn {
+  padding: 15px 20px;
+  border: 2px solid #089da1;
+  text-decoration: none;
+  color: #000;
+  background: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+}
+
+.review_btn:hover {
+  background-color: transparent;
+  border-color: #1100ff;
+  color: #07e4e4;
+  box-shadow: 4px 4px 10px;
+}
+
+/* Review Popup */
+.review-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.review-overlay.show {
+  display: flex;
+}
+
+.review-wrapper {
+  width: 420px;
+  max-width: 90%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(9px);
+  color: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
+}
+
+.review-wrapper h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.review_input_box {
+  margin: 10px 0;
+}
+
+.review_input_box input,
+.review_input_box textarea,
+.review_input_box select {
+  width: 100%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: #fff;
+  outline: none;
+  border-radius: 20px;
+  padding: 15px;
+  font-size: 15px;
+}
+
+.review_input_box input::placeholder,
+.review_input_box textarea::placeholder {
+  color: #fff;
+}
+
+.review_input_box textarea {
+  height: 140px;
+  resize: none;
+}
+
+.review_input_box select option {
+  color: #000;
+}
+
+.review_buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px 0;
+}
+
+.review_buttons a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.review_buttons a:hover {
+  text-decoration: underline;
+}
+
+.review_submit_btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  background: #089da1;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.review_submit_btn:hover {
+  background: #1900ff;
+}
+
+/*Banner*/
+
+.banner {
+  text-align: center;
+}
+.banner img {
+  width: 400px;
+  height: 150px;
+  margin-top: 40 px;
+}
+
+.banner img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  width: 230px; /* Set the desired small width */
+}
+
+.banner img ul {
+  list-style: none;
+}
+
+.banner img ul li {
+  display: inline-block;
+  padding: 0 10px;
+}
+
+*Footer*/ footer {
+  width: 100%;
+  background: #eaeaea;
+}
+
+footer .footer_main {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+footer .footer_main .tag {
+  margin: 10px 0;
+}
+
+footer .footer_main .tag img {
+  width: 100px;
+  margin-bottom: 10px;
+}
+
+footer .footer_main .tag p {
+  width: 250px;
+  line-height: 22px;
+  text-align: justify;
+}
+
+footer .footer_main .tag h1 {
+  font-size: 25px;
+  margin: 25px 0;
+  color: #000;
+}
+
+footer .footer_main .tag a {
+  display: block;
+  color: black;
+  text-decoration: none;
+  margin: 10px 0;
+}
+
+footer .footer_main .tag i {
+  margin-right: 10px;
+}
+
+footer .footer_main .tag .social_link i {
+  margin: 0 5px;
+}
+
+footer .footer_main .tag .search_bar {
+  width: 230px;
+  height: 30px;
+  background: rgba(202, 202, 202);
+  border-radius: 25px;
+}
+
+footer .footer_main .tag .search_bar input {
+  width: 200px;
+  padding: 2px 0;
+  position: relative;
+  top: 17%;
+  left: 6%;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  background: none;
+}
+
+footer .footer_main .tag .search_bar button {
+  padding: 7px 15px;
+  background: #089da1;
+  border: none;
+  margin-top: 15px;
+  border-radius: 25px;
+  color: #fff;
+  cursor: pointer;
+}
+
+footer .end {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  color: #000;
+}
+
+footer .end span {
+  color: #089da1;
+  margin-left: 10px;
+}
+
+/* DARK MODE OVERRIDES */
+/* Learn More Expand Styles */
+.more-text {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  display: block;
+  transition: all 0.5s ease-in-out;
+}
+
+.more-text.show {
+  max-height: 500px;
+  opacity: 1;
+  margin-top: 10px;
+}
+
+/* ============================================================
+   BOOK DETAIL MODAL
+   ============================================================ */
+.book-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  padding: 20px;
+}
+
+.book-modal-overlay.show {
+  display: flex;
+}
+
+.book-modal {
+  background: #fff;
+  border-radius: 16px;
+  max-width: 820px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  animation: modalSlideIn 0.3s ease;
+  overflow: hidden;
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.book-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #666;
+  line-height: 1;
+  z-index: 10;
+  transition: color 0.2s;
+}
+.book-modal-close:hover {
+  color: #e74c3c;
+}
+
+.book-modal-content {
+  display: flex;
+  gap: 30px;
+  padding: 40px;
+}
+
+.book-modal-img {
+  flex-shrink: 0;
+}
+
+.book-modal-img img {
+  width: 200px;
+  height: 290px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.book-modal-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
+  flex: 1;
+}
+
+.book-modal-info h2 {
+  font-size: 24px;
+  color: #3e356b;
+  margin-bottom: 4px;
+}
+
+.modal-author,
+.modal-genre,
+.modal-price {
+  font-size: 15px;
+  color: #555;
+  margin: 0;
+}
+
+.modal-author i,
+.modal-genre i,
+.modal-price i {
+  color: #089da1;
+  margin-right: 6px;
+}
+
+.modal-divider {
+  height: 2px;
+  background: linear-gradient(to right, #089da1, #3e356b);
+  border-radius: 2px;
+  margin: 8px 0;
+}
+
+.modal-description {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #444;
+  text-align: justify;
+}
+
+.modal-select-btn {
+  margin-top: auto;
+  padding: 12px 28px;
+  background: #089da1;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  align-self: flex-start;
+}
+.modal-select-btn:hover {
+  background: #3e356b;
+}
+
+/* Dark mode for modal */
+/* ============================================================
+   SEARCH PANEL
+   ============================================================ */
+.search-panel {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9000;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 18px 30px 20px;
+  animation: searchSlideDown 0.3s ease;
+}
+
+.search-panel.active {
+  display: block;
+}
+
+@keyframes searchSlideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.search-panel-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 800px;
+  margin: 0 auto 16px;
+}
+
+#searchInput {
+  flex: 1;
+  padding: 12px 18px;
+  border: 2px solid #089da1;
+  border-radius: 30px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+#searchInput:focus {
+  border-color: #3e356b;
+}
+
+#searchSubmitBtn {
+  padding: 12px 24px;
+  background: #089da1;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  white-space: nowrap;
+}
+#searchSubmitBtn:hover {
+  background: #3e356b;
+}
+
+.search-close-btn {
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 6px 10px;
+}
+.search-close-btn:hover {
+  color: #e74c3c;
+}
+
+/* Results grid */
+.search-results {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  max-height: 62vh;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.search-section-label {
+  grid-column: 1 / -1;
+  font-size: 15px;
+  font-weight: bold;
+  color: #089da1;
+  margin-bottom: 4px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.search-no-result {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 18px;
+  color: #888;
+  padding: 30px 0;
+}
+
+/* Search book card */
+.search-book-card {
+  background: #fff;
+  border: 1px solid #d4d4d4;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    box-shadow 0.25s,
+    transform 0.25s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.search-book-card:hover {
+  box-shadow: 0 6px 18px rgba(8, 157, 161, 0.25);
+  transform: translateY(-3px);
+}
+
+.search-book-card img {
+  width: 110px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.search-book-card .s-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: #3e356b;
+  line-height: 1.3;
+}
+
+.search-book-card .s-author {
+  font-size: 12px;
+  color: #666;
+}
+
+.search-book-card .s-genre {
+  font-size: 11px;
+  color: #089da1;
+}
+
+.search-book-card .s-select-btn {
+  padding: 7px 18px;
+  background: #089da1;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 4px;
+  width: 100%;
+}
+.search-book-card .s-select-btn:hover {
+  background: #3e356b;
+}
+
+/* My Liked Books panel — unlike control */
+.liked-book-card {
+  position: relative;
+}
+
+.liked-unlike-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 50%;
+  background: #e74c3c;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+
+.liked-unlike-btn:hover:not(:disabled) {
+  background: #c0392b;
+  transform: scale(1.05);
+}
+
+.liked-unlike-btn:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+/* Dark mode */
+/* ============================================================
+   ADD BOOK FORM — Multi-category checkbox group
+   ============================================================ */
+.category-checkbox-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+  padding: 10px 4px;
+}
+
+.category-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #e0e0e0;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+  user-select: none;
+}
+
+.category-checkbox-label:hover {
+  background: rgba(8, 157, 161, 0.18);
+  border-color: #089da1;
+}
+
+.category-checkbox-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #089da1;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.category-checkbox-label.checked {
+  background: rgba(8, 157, 161, 0.25);
+  border-color: #089da1;
+  color: #fff;
+}
+
+.form-group-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 8px;
+  display: block;
+  letter-spacing: 0.4px;
+}
+
+.form-error-msg {
+  color: #ff8080;
+  font-size: 13px;
+  margin-top: 6px;
+  min-height: 18px;
+  display: block;
+}
+
+/* ============================================================
+   CUSTOM BOOK CARD — Dual button layout
+   ============================================================ */
+.custom-book-actions {
+  display: flex;
+  gap: 6px;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.custom-book-actions .f_btn-details {
+  flex: 1;
+  padding: 7px 4px;
+  border: 2px solid #089da1;
+  background: transparent;
+  color: #089da1;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+  transition:
+    background 0.25s,
+    color 0.25s;
+  white-space: nowrap;
+}
+
+.custom-book-actions .f_btn-details:hover {
+  background: #089da1;
+  color: #fff;
+}
+
+.custom-book-actions .f_btn-cart {
+  flex: 1;
+  padding: 7px 4px;
+  border: none;
+  background: #089da1;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.25s;
+  white-space: nowrap;
+}
+
+.custom-book-actions .f_btn-cart:hover {
+  background: #3e356b;
+}
+
+/* ============================================================
+   BOOK CARD RATING STARS
+   ============================================================ */
+.card-rating-stars {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.card-rating-stars i {
+  color: #f39c12;
+}
+
+/* ============================================================
+   CART BADGE — Properly positioned wrapper
+   ============================================================ */
+.cart-icon-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.cart-icon-wrapper #cartBadge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: #e74c3c;
+  color: #fff;
+  font-size: 11px;
+  border-radius: 50%;
+  min-width: 18px;
+  height: 18px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  line-height: 1;
+  padding: 0 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  animation: badgePop 0.2s ease;
+}
+
+.cart-icon-wrapper #cartBadge.visible {
+  display: inline-flex;
+}
+
+@keyframes badgePop {
+  from {
+    transform: scale(0.6);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* ============================================================
+   BOOK DETAIL MODAL — Rating stars row
+   ============================================================ */
+.modal-rating-stars {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  font-size: 18px;
+}
+
+.modal-rating-stars i {
+  color: #f39c12;
+}
+
+.modal-categories-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 4px 0;
+}
+
+.modal-category-badge {
+  background: linear-gradient(135deg, #089da1, #3e356b);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+}
+
+/* Dark mode for new elements */
+/* ========================================================= */
+/* ADMIN BOOK MANAGEMENT TABLE & MODAL STYLES                */
+/* ========================================================= */
+
+/* =========================================
+   Admin
+========================================= */
+.admin-table-container {
+  width: 100%;
+  overflow-x: auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.admin-table th {
+  background: #f8f9fa;
+  color: #3e356b;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+.admin-table tbody tr:hover {
+  background: #fdfdfd;
+}
+
+.admin-table-img {
+  width: 50px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.status-badge {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: inline-block;
+}
+.status-badge.confirmed {
+  background: #d4edda;
+  color: #155724;
+}
+.status-badge.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-visible {
+  background: #e8f8f5;
+  color: #089da1;
+}
+.status-hidden {
+  background: #fdf2e9;
+  color: #e67e22;
+}
+
+.action-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  transition: all 0.2s;
+}
+.btn-edit {
+  background: #e8f4f8;
+  color: #2980b9;
+}
+.btn-edit:hover {
+  background: #2980b9;
+  color: #fff;
+}
+
+.btn-hide {
+  background: #fdf2e9;
+  color: #d35400;
+}
+.btn-hide:hover {
+  background: #d35400;
+  color: #fff;
+}
+
+.btn-show {
+  background: #e8f8f5;
+  color: #16a085;
+}
+.btn-show:hover {
+  background: #16a085;
+  color: #fff;
+}
+
+.btn-delete {
+  background: #fdedec;
+  color: #c0392b;
+}
+.btn-delete:hover {
+  background: #c0392b;
+  color: #fff;
+}
+
+/* =========================================
+   Admin (Dark Mode)
+========================================= */
+/* ============================================================
+   VIDEO OVERLAY STYLES
+   ============================================================ */
+.video-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 100000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  padding: 20px;
+}
+
+.video-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.video-modal-container {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+  transform: scale(0.9);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.video-overlay.active .video-modal-container {
+  transform: scale(1);
+}
+
+.video-modal-container video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: block;
+  background: #000;
+  outline: none;
+}
+
+.video-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 28px;
+  cursor: pointer;
+  z-index: 100001;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  line-height: 1;
+  backdrop-filter: blur(4px);
+}
+
+.video-close-btn:hover {
+  background: rgba(255, 0, 0, 0.6);
+  transform: rotate(90deg);
+  border-color: transparent;
+}
+
+/* Customizing video controls behavior (optional/modern) */
+video::-webkit-media-controls-panel {
+  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.7)) !important;
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN (Media Queries)
+   ============================================================ */
+
+/* =========================================
+   Responsive
+========================================= */
+/* TABLET & SMALL DESKTOP (max-width: 1024px) */
+@media (max-width: 1024px) {
+  /* =========================================
+   Home
+========================================= */
+section .main {
+    flex-direction: column;
+    text-align: center;
+    top: 5%;
+  }
+  section .main h1,
+  section .main p,
+  section .main .main_tag .main_btn,
+  section .main .main_img img {
+    top: 0;
+    left: 0;
+    margin: 15px auto;
+  }
+  section .main p {
+    width: 80%;
+  }
+  section .main .main_img img {
+    width: 80%;
+  }
+  .about {
+    flex-direction: column;
+    text-align: center;
+  }
+  .about .about_image img {
+    width: 90%;
+    margin-bottom: 30px;
+  }
+  .about .about_tag h1 {
+    bottom: 0;
+  }
+  .about .about_tag p {
+    width: 100%;
+    margin: 0 auto 15px auto;
+  }
+  .arrivals .arrivals_box {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .services .services_box {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .admin-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* TABLET PORTRAIT (max-width: 768px) */
+@media (max-width: 768px) {
+  /* =========================================
+   Navbar
+========================================= */
+section nav {
+    flex-direction: column;
+    padding: 15px 0;
+    gap: 15px;
+  }
+  section nav ul {
+    text-align: center;
+  }
+  section nav li {
+    margin-bottom: 5px;
+  }
+  section .main h1 {
+    font-size: 40px;
+  }
+  section .main p {
+    width: 95%;
+  }
+  section .main .main_img img {
+    width: 95%;
+  }
+  .arrivals .arrivals_box {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .book-modal-content {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  .book-modal-img img {
+    width: 150px;
+    height: auto;
+  }
+  .book-modal-info {
+    text-align: center;
+  }
+  .modal-select-btn {
+    align-self: center;
+  }
+  footer .footer_main {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  footer .footer_main .tag {
+    margin: 20px 0;
+  }
+  footer .footer_main .tag p {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .admin-grid {
+    grid-template-columns: 1fr;
+  }
+  .admin-container {
+    width: 95%;
+    padding: 15px;
+  }
+  .search-panel-inner {
+    flex-direction: column;
+  }
+  #searchSubmitBtn {
+    width: 100%;
+  }
+  .login-overlay .wrapper,
+  .review-wrapper {
+    width: 95%;
+    padding: 20px;
+  }
+  .video-modal-container {
+    border-radius: 12px;
+  }
+  .video-close-btn {
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    font-size: 22px;
+  }
+}
+
+/* MOBILE (max-width: 480px) */
+@media (max-width: 480px) {
+  section .main h1 {
+    font-size: 32px;
+  }
+  .arrivals .arrivals_box {
+    grid-template-columns: 1fr;
+  }
+  .featured_boks .featured_book_box {
+    padding-bottom: 10px;
+  }
+  .admin-table th,
+  .admin-table td {
+    padding: 8px;
+    font-size: 12px;
+  }
+  .admin-table-img {
+    width: 40px;
+    height: 60px;
+  }
+  .video-modal-container {
+    width: 100%;
+    margin: 10px;
+  }
+  .category-checkbox-group {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   ADMIN DASHBOARD PAGE (body.admin-page) — ALPHA Book Store
+   Matches main site: wolf bg, #089da1, #3e356b, #1900ff, glass cards
+   ============================================================ */
+body.admin-page {
+  margin: 0;
+}
+
+body.admin-page .admin-container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 28px auto 50px;
+  padding: 28px 26px 36px;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+body.admin-page .admin-auth-banner {
+  display: none;
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: #fdecea;
+  border: 1px solid #f5c2c0;
+  color: #7f1d1d;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+body.admin-page .admin-auth-banner.is-visible {
+  display: block;
+}
+
+body.admin-page .admin-dashboard-stats {
+  margin-bottom: 22px;
+}
+
+body.admin-page .admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 14px;
+}
+
+body.admin-page .admin-stat-item {
+  background: #fff;
+  border: 1px solid #e0e4ee;
+  border-radius: 10px;
+  padding: 14px 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(25, 0, 255, 0.06);
+}
+
+body.admin-page .admin-stat-item .stat-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #3e356b;
+  margin-bottom: 6px;
+}
+
+body.admin-page .admin-stat-item .stat-value {
+  font-size: 24px;
+  font-weight: 800;
+  color: #089da1;
+}
+
+body.admin-page .admin-stat-item .stat-hint {
+  margin-top: 6px;
+  font-size: 11px;
+  color: #666;
+}
+
+body.admin-page .admin-dash-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 26px;
+}
+
+body.admin-page .admin-header {
+  margin: 0;
+  font-size: 32px;
+  color: #3e356b;
+  font-weight: 800;
+}
+
+body.admin-page .admin-add-book-btn {
+  background: #3e356b !important;
+  white-space: nowrap;
+}
+
+body.admin-page .admin-add-book-btn:hover {
+  background: #1900ff !important;
+}
+
+body.admin-page .admin-reset-btn {
+  background: #e74c3c !important;
+}
+
+body.admin-page .admin-reset-btn:hover {
+  background: #c0392b !important;
+}
+
+body.admin-page .admin-section-card {
+  margin-bottom: 18px;
+  padding: 16px 18px 18px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(8, 157, 161, 0.25);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Book Management: compact table + preview toggle */
+body.admin-page .admin-book-management .admin-section-intro {
+  margin-bottom: 8px;
+}
+
+body.admin-page .book-management-summary {
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: #3e356b;
+  font-weight: 600;
+}
+
+body.admin-page .admin-book-management .admin-table-container {
+  margin-bottom: 8px;
+}
+
+body.admin-page .admin-book-management .admin-table th,
+body.admin-page .admin-book-management .admin-table td {
+  padding: 10px 12px;
+  font-size: 13px;
+}
+
+body.admin-page .admin-book-management .admin-table th {
+  font-size: 11px;
+}
+
+body.admin-page .admin-book-management .admin-table-img {
+  width: 46px;
+  height: 66px;
+}
+
+body.admin-page .admin-book-management .action-btn {
+  padding: 5px 10px;
+  font-size: 11px;
+  margin-right: 4px;
+  margin-bottom: 4px;
+}
+
+body.admin-page .admin-book-list-toggle-wrap {
+  text-align: center;
+  padding: 4px 0 2px;
+}
+
+body.admin-page .show-books-toggle {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: inherit;
+  color: #fff;
+  background: linear-gradient(135deg, #089da1, #3e356b);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+body.admin-page .show-books-toggle:hover {
+  box-shadow: 0 0 12px rgba(25, 0, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+body.admin-page .admin-section-card h2 {
+  margin: 0 0 12px;
+  color: #089da1;
+  font-size: 1.35rem;
+  border-bottom: 2px solid #089da1;
+  padding-bottom: 10px;
+}
+
+body.admin-page .admin-section-intro {
+  color: #555;
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0 0 14px;
+  max-width: 720px;
+}
+
+body.admin-page .admin-section-meta {
+  margin: 0 0 14px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #3e356b;
+}
+
+body.admin-page .admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 18px;
+}
+
+body.admin-page .admin-card {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+  font-size: 14px;
+  color: #444;
+  line-height: 1.5;
+}
+
+body.admin-page .admin-card h3 {
+  font-size: 17px;
+  margin: 10px 0 6px;
+  color: #333;
+}
+
+body.admin-page .admin-card .badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+body.admin-page .admin-card img {
+  width: 100px;
+  height: 150px;
+  object-fit: cover;
+  margin: 8px 0;
+  border-radius: 4px;
+}
+
+body.admin-page .admin-order-card-inner {
+  text-align: left;
+  font-size: 13px;
+  color: #444;
+  line-height: 1.65;
+  margin-top: 8px;
+}
+
+body.admin-page .admin-empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 18px;
+  color: #666;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px dashed #089da1;
+  border-radius: 10px;
+}
+
+body.admin-page .admin-error-box {
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  font-size: 14px;
+}
+
+body.admin-page .admin-table td .admin-empty-state {
+  display: block;
+  max-width: 520px;
+  margin: 12px auto;
+  text-align: center;
+}
+
+body.admin-page .admin-modal-label {
+  display: block;
+  text-align: left;
+  font-size: 12px;
+  color: #555;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Admin Edit Book modal: readable fields */
+body.admin-page #adminEditBookOverlay .review_input_box input,
+body.admin-page #adminEditBookOverlay .review_input_box textarea {
+  color: #222;
+  background: #fff;
+}
+
+@media (max-width: 768px) {
+  body.admin-page .admin-container {
+    width: 95%;
+    padding: 18px 14px 28px;
+    margin: 18px auto 36px;
+  }
+
+  body.admin-page .admin-header {
+    font-size: 26px;
+  }
+
+  body.admin-page .admin-dash-head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  body.admin-page .admin-add-book-btn {
+    width: 100%;
+  }
+
+  body.admin-page .admin-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  body.admin-page .admin-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  body.admin-page .admin-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Add New Book modal - text color fix */
+#addBookModal input,
+#addBookModal textarea,
+#addBookModal select,
+.add-book-modal input,
+.add-book-modal textarea,
+.add-book-modal select,
+.book-form input,
+.book-form textarea,
+.book-form select {
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  background: #fff !important;
+}
+
+#addBookModal input::placeholder,
+#addBookModal textarea::placeholder,
+.add-book-modal input::placeholder,
+.add-book-modal textarea::placeholder,
+.book-form input::placeholder,
+.book-form textarea::placeholder {
+  color: #777 !important;
+  opacity: 1;
+}
+
+#addBookModal label,
+.add-book-modal label,
+.book-form label {
+  color: #222 !important;
+}
+
+/* Span heading for category group (not a <label>) */
+#addBookModal .form-group-label {
+  color: #222 !important;
+}
+
+#addBookModal .admin-modal-label--accent {
+  color: #089da1 !important;
+}

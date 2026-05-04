@@ -1,0 +1,277 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ALPHA Book Store - Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body class="admin-page">
+    <section
+      id="ALPHA"
+      style="
+        height: auto;
+        min-height: 100vh;
+        background-image: url(image/wolfe.jpg);
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+      "
+    >
+      <nav
+        style="
+          box-shadow: 0 0 20px #1900ff;
+          background: rgba(255, 255, 255, 0.8);
+        "
+      >
+        <div class="logo">
+          <a href="index.html"><img src="image/logo.png" style="width: 135px; height: auto" alt="ALPHA Book Store" /></a>
+        </div>
+        <ul>
+          <li><a href="index.html">Back to Home</a></li>
+        </ul>
+        <div class="social_icon" style="display: flex; align-items: center; gap: 15px">
+          <button type="button" id="logoutBtn" class="login_nav_btn">Logout</button>
+        </div>
+      </nav>
+
+      <div class="admin-container">
+        <div id="adminAuthBanner" class="admin-auth-banner" role="alert"></div>
+
+        <div id="adminDashboardStats" class="admin-dashboard-stats">
+          <p style="text-align: center; color: #3e356b; font-weight: bold">Loading dashboard statistics...</p>
+        </div>
+
+        <div class="admin-dash-head">
+          <h1 class="admin-header">Admin Dashboard</h1>
+          <button type="button" id="adminAddBookBtn" class="login_nav_btn admin-add-book-btn">
+            + Add New Book
+          </button>
+        </div>
+
+        <div class="admin-section-card">
+          <h2>System Actions</h2>
+          <p class="admin-section-intro">
+            Reset Catalog restores the original 15 default books in the database and clears reviews, orders,
+            carts, and likes. User accounts are kept.
+          </p>
+          <button type="button" id="resetCatalogBtn" class="login_nav_btn admin-reset-btn">Reset Catalog</button>
+        </div>
+
+        <div class="admin-section-card">
+          <h2>Registered Users</h2>
+          <p id="usersSectionMeta" class="admin-section-meta"></p>
+          <div id="usersGrid" class="admin-grid"></div>
+        </div>
+
+        <div class="admin-section-card">
+          <h2>Book Orders</h2>
+          <p id="ordersSectionMeta" class="admin-section-meta"></p>
+          <div id="ordersGrid" class="admin-grid"></div>
+        </div>
+
+        <div class="admin-section-card admin-book-management">
+          <h2>Book Management (Storefront Catalog)</h2>
+          <p class="admin-section-intro">
+            Edit visibility and pricing. Hidden books do not appear on the homepage. Delete removes the book from
+            the database.
+          </p>
+          <p id="bookManagementSummary" class="book-management-summary" aria-live="polite"></p>
+          <div class="admin-table-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Book Info</th>
+                  <th>Price &amp; Discount</th>
+                  <th>Rating</th>
+                  <th>Visibility</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="bookManagementTbody"></tbody>
+            </table>
+          </div>
+          <div id="adminBookListToggleWrap" class="admin-book-list-toggle-wrap" style="display: none">
+            <button type="button" id="adminBookListToggleBtn" class="show-books-toggle">
+              Show All Books
+            </button>
+          </div>
+        </div>
+
+        <div class="admin-section-card">
+          <h2>User Liked Books</h2>
+          <p id="likesSectionMeta" class="admin-section-meta"></p>
+          <div id="likesGrid" class="admin-grid"></div>
+        </div>
+
+        <div class="admin-section-card">
+          <h2>User Reviews</h2>
+          <p id="reviewsSectionMeta" class="admin-section-meta"></p>
+          <div id="reviewsGrid" class="admin-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Edit Book Modal -->
+    <div class="review-overlay" id="adminEditBookOverlay">
+      <div class="review-wrapper" style="width: 400px; max-height: 90vh; overflow-y: auto">
+        <form id="adminEditBookForm">
+          <h2 style="margin-bottom: 20px">Edit Book Details</h2>
+          <input type="hidden" id="editBookId" />
+
+          <div class="review_input_box">
+            <label class="admin-modal-label">Title</label>
+            <input type="text" id="editBookTitle" required />
+          </div>
+          <div class="review_input_box">
+            <label class="admin-modal-label">Author</label>
+            <input type="text" id="editBookAuthor" required />
+          </div>
+          <div class="review_input_box">
+            <label class="admin-modal-label">Genre (comma-separated)</label>
+            <input type="text" id="editBookGenre" placeholder="e.g. Fiction, Mystery" />
+          </div>
+          <div class="review_input_box">
+            <label class="admin-modal-label">Categories (comma-separated)</label>
+            <input type="text" id="editBookCategories" placeholder="e.g. Fiction, Romance" />
+          </div>
+          <div class="review_input_box">
+            <label class="admin-modal-label">Image URL</label>
+            <input type="url" id="editBookImage" required />
+          </div>
+          <div class="review_input_box">
+            <label class="admin-modal-label">Description</label>
+            <textarea id="editBookDescription" style="height: 80px; resize: vertical"></textarea>
+          </div>
+          <div class="review_input_box">
+            <label class="admin-modal-label">Original Price ($)</label>
+            <input type="number" step="0.01" id="editBookPrice" required placeholder="e.g. 100.00" />
+          </div>
+          <div class="review_input_box">
+            <label class="admin-modal-label">Discount (%) (Optional)</label>
+            <input type="number" step="1" min="0" max="100" id="editBookDiscount" placeholder="e.g. 20" />
+          </div>
+          <div class="review_input_box" style="background: #f9f9f9; padding: 10px; border-radius: 8px; border: 1px solid #eee">
+            <label class="admin-modal-label" style="color: #089da1">Final Discounted Price</label>
+            <div id="editBookFinalPrice" style="font-size: 20px; font-weight: bold; color: #3e356b">$0.00</div>
+          </div>
+          <div class="review_input_box">
+            <label class="admin-modal-label">Rating (0-5)</label>
+            <input type="number" step="0.1" min="0" max="5" id="editBookRating" required />
+          </div>
+          <button type="submit" class="review_btn" style="margin-top: 10px">Save Changes</button>
+          <button type="button" class="review_btn" id="adminCloseEditBookBtn" style="background: #e74c3c; margin-top: 10px">
+            Cancel
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Add Book Modal -->
+    <div class="review-overlay add-book-modal" id="addBookModal">
+      <div class="review-wrapper" style="width: 540px; max-height: 90vh; overflow-y: auto">
+        <form id="adminAddBookForm" class="book-form">
+          <h2 style="margin-bottom: 10px">Add New Book</h2>
+
+          <div
+            class="review_input_box"
+            style="
+              display: flex;
+              gap: 10px;
+              margin-bottom: 15px;
+              background: rgba(8, 157, 161, 0.05);
+              padding: 15px;
+              border-radius: 10px;
+              border: 1px dashed #089da1;
+              flex-wrap: wrap;
+            "
+          >
+            <input
+              type="text"
+              id="openLibraryQuery"
+              placeholder="Search by Title or Author..."
+              style="flex: 1; min-width: 160px; border-radius: 5px; padding: 8px 12px; border: 1px solid #ccc"
+            />
+            <button type="button" id="openLibraryFetchBtn" class="login_nav_btn" style="flex-shrink: 0">Search / Fetch</button>
+            <button
+              type="button"
+              id="openLibraryRandomBtn"
+              class="login_nav_btn"
+              style="flex-shrink: 0; background: #3e356b"
+            >
+              Random pick
+            </button>
+          </div>
+          <p
+            id="openLibraryStatus"
+            style="font-size: 12px; color: #e74c3c; margin-top: -10px; margin-bottom: 15px; display: none; font-weight: bold; text-align: center"
+          ></p>
+
+          <div class="review_input_box">
+            <input type="text" id="adminBookTitle" placeholder="Book Title" required />
+          </div>
+          <div class="review_input_box">
+            <input type="text" id="adminBookAuthor" placeholder="Author Name" required />
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px">
+            <div class="review_input_box">
+              <label class="admin-modal-label">Original Price ($)</label>
+              <input type="number" step="0.01" id="adminBookPrice" placeholder="e.g. 50.00" required />
+            </div>
+            <div class="review_input_box">
+              <label class="admin-modal-label">Discount (%)</label>
+              <input type="number" step="1" min="0" max="100" id="adminBookDiscount" placeholder="0 - 100" />
+            </div>
+          </div>
+          <div
+            class="review_input_box"
+            style="background: #f0fdfd; padding: 12px; border-radius: 10px; border: 1.5px solid #089da1; margin-bottom: 20px"
+          >
+            <label class="admin-modal-label admin-modal-label--accent">Auto-Calculated Final Price</label>
+            <div id="adminBookFinalPriceDisplay" style="font-size: 22px; font-weight: bold; color: #3e356b">$0.00</div>
+          </div>
+          <div class="review_input_box">
+            <input type="number" step="0.1" min="0" max="5" id="adminBookRating" placeholder="Rating (0-5)" required />
+          </div>
+          <div class="review_input_box">
+            <input type="url" id="adminBookImage" placeholder="Book Image URL" required />
+          </div>
+          <div class="review_input_box">
+            <textarea id="adminBookSummary" placeholder="Book Summary / Description..." style="height: 90px; resize: vertical"></textarea>
+          </div>
+          <div class="review_input_box">
+            <span class="form-group-label">Book Categories (select one or more)</span>
+            <div class="category-checkbox-group" id="categoryCheckboxGroup">
+              <label class="category-checkbox-label"><input type="checkbox" value="Fiction" /> Fiction</label>
+              <label class="category-checkbox-label"><input type="checkbox" value="Romance" /> Romance</label>
+              <label class="category-checkbox-label"><input type="checkbox" value="Mystery" /> Mystery</label>
+              <label class="category-checkbox-label"><input type="checkbox" value="Fantasy" /> Fantasy</label>
+              <label class="category-checkbox-label"><input type="checkbox" value="Science" /> Science</label>
+              <label class="category-checkbox-label"><input type="checkbox" value="Technology" /> Technology</label>
+              <label class="category-checkbox-label"><input type="checkbox" value="History" /> History</label>
+              <label class="category-checkbox-label"><input type="checkbox" value="Business" /> Business</label>
+              <label class="category-checkbox-label"><input type="checkbox" value="Horror" /> Horror</label>
+              <label class="category-checkbox-label"><input type="checkbox" value="Self-development" /> Self-development</label>
+            </div>
+            <span class="form-error-msg" id="categoryError"></span>
+          </div>
+          <div class="review_buttons" style="margin-top: 16px">
+            <a href="#" id="adminCloseAddBookBtn">Close</a>
+            <button type="submit" class="review_submit_btn">Add Book</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
