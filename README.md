@@ -1,56 +1,157 @@
 # ALPHA Book Store
 
-A full-stack bookstore demo: static HTML/CSS/JS storefront plus a **Node.js + Express + MongoDB** REST API (JWT auth, cart, orders, reviews, likes, admin tools).
+**ALPHA Book Store** is a full-stack interactive bookstore web application developed for the **Multimedia and Web Design** course at International Balkan University.
 
-## Repository layout
+The project includes a responsive online bookstore frontend, user authentication, a shopping cart, book ordering, reviews, likes, and a complete admin dashboard for managing the store catalog, users, orders, and system data.
 
-| Path | Role |
-|------|------|
-| `backend/` | API (`server.js`), Mongoose models, routes |
-| `Book store ALPHA the last version.(10)/Book Store ALPHA/` | Static site (`index.html`, `admin.html`, `script.js`, assets) |
+This project was built as a complete web application using:
 
-## Prerequisites
+- HTML5
+- CSS3
+- JavaScript
+- jQuery
+- Fetch API / AJAX
+- Node.js
+- Express.js
+- MongoDB Atlas
+- JWT Authentication
 
-- [Node.js](https://nodejs.org/) (LTS recommended)
-- A [MongoDB Atlas](https://www.mongodb.com/atlas) cluster and connection string
+---
 
-## Quick start
+## Project Objective
 
-### 1. Backend
+The objective of ALPHA Book Store is to create a functional, visually appealing, and interactive web application where users can browse books, view book details, create accounts, like books, add books to a cart, and place orders.
 
-```powershell
-cd backend
-npm install
-copy .env.example .env
-```
+The project also includes an admin dashboard that allows administrators to manage books, users, orders, reviews, and catalog visibility.
 
-Edit `backend/.env`: set **`MONGODB_URI`** and a **`JWT_SECRET`** of at least 16 characters (see `.env.example` for optional admin and CORS settings).
+This demonstrates frontend development, backend development, database integration, API design, authentication, multimedia design, responsive layout, and version control using GitHub.
 
-```powershell
-npm run dev
-```
+---
 
-API listens on **http://localhost:5000** (default). Health check: [http://localhost:5000/api/health](http://localhost:5000/api/health).
+## Team Members and Roles
 
-### 2. Frontend
+| Team Member | Role | Main Responsibilities |
+|---|---|---|
+| Adam Demiroski | Full-Stack Developer | Frontend, backend, database, authentication, admin dashboard, API integration, testing, documentation |
+| Add teammate name here | Frontend / UI Designer | Add contribution here |
+| Add teammate name here | Tester / Content Manager | Add contribution here |
 
-Serve the static folder on **port 3000** so it matches API CORS defaults:
+> Replace the placeholder names with your real team members before submission.
 
-```powershell
-cd "Book store ALPHA the last version.(10)/Book Store ALPHA"
-npx --yes serve -p 3000
-```
+---
 
-Open **http://localhost:3000**. The client uses `API_BASE_URL` in `script.js` (default `http://localhost:5000/api`). Change that value when you deploy the API to another host.
+## Main Features
 
-### 3. Admin (after seed)
+### Storefront Features
 
-Default admin credentials come from `.env` (`ADMIN_EMAIL` / `ADMIN_PASSWORD` in `.env.example`). Sign in with **email + password** on the site; admins are sent to `admin.html`.
+- Responsive homepage
+- Featured books section
+- Coming Soon / Arrivals books section
+- Book details modal
+- Book images and descriptions
+- Search panel for finding books
+- Like system for users
+- Cart system
+- Order form
+- Review system
+- Login and sign-up system
+- Welcome message after login
+- Admin page link shown only for admin users
+- Multimedia content including images, icons, and video elements
 
-## Documentation
+### User Features
 
-- **[README_BACKEND.md](README_BACKEND.md)** — environment variables, endpoints table, catalog reset, deployment notes, troubleshooting.
+- User registration
+- User login
+- JWT-based login state
+- Like books
+- View liked books
+- Add books to cart
+- Remove books from cart
+- Place book orders
+- Submit reviews
 
-## License
+### Admin Dashboard Features
 
-Use and modify for your own learning or projects; add a license file if you plan to distribute the code.
+- Admin login
+- Dashboard statistics
+- View registered users
+- View book orders
+- Add new books
+- Edit book information
+- Update price, discount, and rating
+- Hide books from the storefront
+- Show hidden books again
+- Delete books from the database
+- Delete reviews
+- Reset catalog to default data
+- Manage store data through protected admin routes
+
+---
+
+## Technologies and Libraries Used
+
+### Frontend
+
+| Technology | Purpose |
+|---|---|
+| HTML5 | Page structure and semantic markup |
+| CSS3 | Styling, layout, transitions, animations |
+| JavaScript | Interactivity and application logic |
+| jQuery | DOM manipulation, events, and animations |
+| Fetch API | Communication with backend REST API |
+| LocalStorage / SessionStorage | Temporary browser-side state such as auth/session helpers |
+| Font Awesome | Icons |
+| Boxicons | Login and UI icons |
+| Leaflet | Map integration |
+| HTML5 Video | Multimedia content |
+
+### Backend
+
+| Technology | Purpose |
+|---|---|
+| Node.js | JavaScript runtime for backend |
+| Express.js | REST API server |
+| MongoDB Atlas | Cloud database |
+| Mongoose | MongoDB object modeling |
+| bcryptjs | Password hashing |
+| JSON Web Token | Authentication and protected routes |
+| CORS | Frontend-backend communication |
+| dotenv | Environment variable management |
+| nodemon | Development server auto-restart |
+
+---
+
+## Project Structure
+
+```txt
+ALPHA-Book-Store/
+│
+├── backend/
+│   ├── server.js
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── .env.example
+│   ├── config/
+│   ├── models/
+│   ├── routes/
+│   ├── middleware/
+│   ├── utils/
+│   └── test-admin-flows.js
+│
+├── Book store ALPHA the last version.(10)/
+│   └── Book Store ALPHA/
+│       ├── index.html
+│       ├── admin.html
+│       ├── script.js
+│       ├── style.css
+│       ├── arrivales_1.css
+│       ├── arrivales_1.html
+│       ├── arrivales_2.html
+│       ├── ...
+│       └── image/
+│
+├── README.md
+├── README_BACKEND.md
+├── .gitignore
+└── serve.json
